@@ -85,6 +85,7 @@
         0 14px 40px rgba(0,0,0,1),
         0 0 35px rgba(168,85,247,0.8);
       transition: 0.25s;
+      border: none;
     }
     .btn-primary:hover {
       transform: translateY(-1px) scale(1.01);
@@ -201,6 +202,7 @@
   </div>
 
   <script>
+    // MESMO CONFIG DO ADMIN
     const firebaseConfig = {
       apiKey: "AIzaSyADWH-HdJUFByEuHBdHZkf7mDSD1-dBnRA",
       authDomain: "cpx-akira.firebaseapp.com",
@@ -238,7 +240,7 @@
         alert("Digite sua KEY.");
         return;
       }
-      db.ref('chaves/' + key).on('value', snap => {
+      db.ref('chaves/' + key).once('value').then(snap => {
         if (snap.exists()) {
           const d = snap.val();
           if (d.validade && new Date().getTime() > d.validade) {
